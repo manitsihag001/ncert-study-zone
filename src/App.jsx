@@ -1,27 +1,24 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { LanguageProvider } from './context/LanguageContext'
 import HomePage from './pages/HomePage'
 import SubjectsPage from './pages/SubjectsPage'
+import BookPage from './pages/BookPage'
+import PDFViewerPage from './pages/PDFViewerPage'
 import './App.css'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home')
-  const [selectedClass, setSelectedClass] = useState(null)
-
-  const handleSelectClass = (classNum) => {
-    setSelectedClass(classNum)
-    setCurrentPage('subjects')
-  }
-
-  const handleBack = () => {
-    setCurrentPage('home')
-    setSelectedClass(null)
-  }
-
-  if (currentPage === 'subjects') {
-    return <SubjectsPage selectedClass={selectedClass} onBack={handleBack} />
-  }
-
-  return <HomePage onSelectClass={handleSelectClass} />
+  return (
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/class/:classNum" element={<SubjectsPage />} />
+          <Route path="/book/:bookId" element={<BookPage />} />
+          <Route path="/book/:bookId/:chapterIndex" element={<PDFViewerPage />} />
+        </Routes>
+      </BrowserRouter>
+    </LanguageProvider>
+  )
 }
 
 export default App

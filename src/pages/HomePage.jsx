@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../context/LanguageContext'
 import './HomePage.css'
 
 const classes = [
@@ -12,20 +13,20 @@ const classes = [
 ]
 
 const subjects = [
+  { name: 'English', nameHi: 'अंग्रेज़ी', icon: '📕' },
+  { name: 'Hindi', nameHi: 'हिंदी', icon: '📖' },
   { name: 'Mathematics', nameHi: 'गणित', icon: '📐' },
   { name: 'Science', nameHi: 'विज्ञान', icon: '🔬' },
   { name: 'Social Science', nameHi: 'सामाजिक विज्ञान', icon: '🌍' },
-  { name: 'Hindi', nameHi: 'हिंदी', icon: '📖' },
-  { name: 'English', nameHi: 'अंग्रेज़ी', icon: '📕' },
   { name: 'Sanskrit', nameHi: 'संस्कृत', icon: '📜' }
 ]
 
-function HomePage({ onSelectClass }) {
-  const [language, setLanguage] = useState('english')
+function HomePage() {
+  const { language, setLanguage } = useLanguage()
+  const navigate = useNavigate()
 
   return (
     <div className="home-page">
-      {/* Language Toggle */}
       <div className="lang-toggle">
         <button
           className={`lang-btn ${language === 'english' ? 'active' : ''}`}
@@ -56,7 +57,7 @@ function HomePage({ onSelectClass }) {
             key={cls.class}
             className="class-card"
             style={{ '--class-color': cls.color }}
-            onClick={() => onSelectClass(cls.class)}
+            onClick={() => navigate(`/class/${cls.class}`)}
           >
             <span className="class-number">{cls.class}</span>
             <span className="class-name">
@@ -69,7 +70,6 @@ function HomePage({ onSelectClass }) {
         ))}
       </div>
 
-      {/* Subjects Preview */}
       <div className="subjects-preview">
         <h3>
           {language === 'english'

@@ -1,0 +1,140 @@
+.book-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.book-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.book-header h2 {
+  flex: 1;
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+.download-btn {
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.download-btn:hover {
+  background: #047857;
+  transform: scale(1.02);
+}
+
+.book-info {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.chapters-list {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+}
+
+.chapters-list h3 {
+  font-size: 1.1rem;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.chapters-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.chapter-item:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  transform: translateX(4px);
+}
+
+.chapter-number {
+  background: #2563eb;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.chapter-name {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.chapter-arrow {
+  color: #94a3b8;
+  font-size: 1.1rem;
+}
+
+.no-pdf {
+  color: #94a3b8;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 600px) {
+  .book-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .book-header h2 {
+    text-align: center;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+}

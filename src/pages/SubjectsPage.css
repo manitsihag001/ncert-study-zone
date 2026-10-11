@@ -145,6 +145,91 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Open/Download Buttons */
+.open-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.open-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.02);
+}
+
+.download-btn-inline {
+  background: #059669;
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.download-btn-inline:hover {
+  background: #047857;
+  transform: scale(1.02);
+}
+
+.close-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #dc2626;
+}
+
+/* Chapter List Inline */
+.chapter-list-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chapter-btn {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.chapter-btn:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.no-pdf {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 .subject-book-info h4 {
   font-size: 1.1rem;
   color: #1e293b;

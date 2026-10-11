@@ -18,64 +18,66 @@ function PDFViewer({ book, language, onClose }) {
     const pdfUrl = book.chapterPdfs?.[chapterIndex] || `${book.url}#page=${chapterIndex + 1}`
     const chapterName = getChapterName(chapterIndex)
     
-    // Create a new window with back button and fullscreen
+    // Create a blob URL for the HTML content
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <title>${chapterName} - ${book.title}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .back-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .back-btn:hover { background: #1d4ed8; }
+    .fullscreen-btn {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .fullscreen-btn:hover { background: #6d28d9; }
+    .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
+    .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
+    <span class="title">${chapterName} - ${book.title}</span>
+    <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
+  </div>
+  <iframe class="pdf-frame" src="${pdfUrl}"></iframe>
+</body>
+</html>`
+    
     const newWindow = window.open('', '_blank')
     if (newWindow) {
-      newWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>${chapterName} - ${book.title}</title>
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
-            .header {
-              display: flex;
-              align-items: center;
-              gap: 1rem;
-              padding: 1rem;
-              background: white;
-              border-bottom: 1px solid #e2e8f0;
-              position: sticky;
-              top: 0;
-              z-index: 100;
-            }
-            .back-btn {
-              background: #2563eb;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .back-btn:hover { background: #1d4ed8; }
-            .fullscreen-btn {
-              background: #7c3aed;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .fullscreen-btn:hover { background: #6d28d9; }
-            .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
-            .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
-            <span class="title">${chapterName} - ${book.title}</span>
-            <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
-          </div>
-          <iframe class="pdf-frame" src="${pdfUrl}"></iframe>
-        </body>
-        </html>
-      `)
+      newWindow.document.open()
+      newWindow.document.write(html)
+      newWindow.document.close()
     }
   }
 
@@ -83,63 +85,65 @@ function PDFViewer({ book, language, onClose }) {
   const openAnswerKey = () => {
     if (!book.answerKey) return
     
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Answer Key - ${book.title}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .back-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .back-btn:hover { background: #1d4ed8; }
+    .fullscreen-btn {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .fullscreen-btn:hover { background: #6d28d9; }
+    .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
+    .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
+    <span class="title">Answer Key - ${book.title}</span>
+    <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
+  </div>
+  <iframe class="pdf-frame" src="${book.answerKey}"></iframe>
+</body>
+</html>`
+    
     const newWindow = window.open('', '_blank')
     if (newWindow) {
-      newWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Answer Key - ${book.title}</title>
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
-            .header {
-              display: flex;
-              align-items: center;
-              gap: 1rem;
-              padding: 1rem;
-              background: white;
-              border-bottom: 1px solid #e2e8f0;
-              position: sticky;
-              top: 0;
-              z-index: 100;
-            }
-            .back-btn {
-              background: #2563eb;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .back-btn:hover { background: #1d4ed8; }
-            .fullscreen-btn {
-              background: #7c3aed;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .fullscreen-btn:hover { background: #6d28d9; }
-            .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
-            .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
-            <span class="title">Answer Key - ${book.title}</span>
-            <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
-          </div>
-          <iframe class="pdf-frame" src="${book.answerKey}"></iframe>
-        </body>
-        </html>
-      `)
+      newWindow.document.open()
+      newWindow.document.write(html)
+      newWindow.document.close()
     }
   }
 
@@ -147,63 +151,65 @@ function PDFViewer({ book, language, onClose }) {
   const openAnswerKey2 = () => {
     if (!book.answerKey2) return
     
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Answer Key (Part 2) - ${book.title}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .back-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .back-btn:hover { background: #1d4ed8; }
+    .fullscreen-btn {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .fullscreen-btn:hover { background: #6d28d9; }
+    .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
+    .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
+    <span class="title">Answer Key (Part 2) - ${book.title}</span>
+    <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
+  </div>
+  <iframe class="pdf-frame" src="${book.answerKey2}"></iframe>
+</body>
+</html>`
+    
     const newWindow = window.open('', '_blank')
     if (newWindow) {
-      newWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Answer Key (Part 2) - ${book.title}</title>
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { font-family: 'Segoe UI', sans-serif; background: #f8fafc; }
-            .header {
-              display: flex;
-              align-items: center;
-              gap: 1rem;
-              padding: 1rem;
-              background: white;
-              border-bottom: 1px solid #e2e8f0;
-              position: sticky;
-              top: 0;
-              z-index: 100;
-            }
-            .back-btn {
-              background: #2563eb;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .back-btn:hover { background: #1d4ed8; }
-            .fullscreen-btn {
-              background: #7c3aed;
-              color: white;
-              border: none;
-              padding: 0.75rem 1.25rem;
-              border-radius: 8px;
-              cursor: pointer;
-              font-size: 1rem;
-              font-weight: 600;
-            }
-            .fullscreen-btn:hover { background: #6d28d9; }
-            .title { font-size: 1.2rem; color: #1e293b; flex: 1; }
-            .pdf-frame { width: 100%; height: calc(100vh - 70px); border: none; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <button class="back-btn" onclick="window.close()">← ${language === 'english' ? 'Back' : 'वापस'}</button>
-            <span class="title">Answer Key (Part 2) - ${book.title}</span>
-            <button class="fullscreen-btn" onclick="document.querySelector('iframe').requestFullscreen()">⛶ ${language === 'english' ? 'Fullscreen' : 'फुलस्क्रीन'}</button>
-          </div>
-          <iframe class="pdf-frame" src="${book.answerKey2}"></iframe>
-        </body>
-        </html>
-      `)
+      newWindow.document.open()
+      newWindow.document.write(html)
+      newWindow.document.close()
     }
   }
 
